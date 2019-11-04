@@ -115,7 +115,7 @@ export default {
         bgImgPath: '',
         audioPath: '',
         texts: [],
-        chapter: ''
+        chapter: this.curChapter
       })
     },
     removeScene (scene) {
@@ -185,10 +185,10 @@ export default {
       event.target.classList.add('active')
     },
     onNextScene () {
-      let curIndex = this.novel.scenes.indexOf(this.sceneEdit)
+      let curIndex = this.curScenes.indexOf(this.sceneEdit)
       curIndex += 1
-      if (curIndex < this.novel.scenes.length) {
-        this.sceneEdit = this.novel.scenes[curIndex]
+      if (curIndex < this.curScenes.length) {
+        this.sceneEdit = this.curScenes[curIndex]
       }
     },
     selectFirstSceneEdit () {
