@@ -8,13 +8,13 @@
           <option v-for="chapter in novel.chapters" :value="chapter" :key="'chapter1' + chapter">{{ chapter }}</option>
         </select><br>
         <button @click="addNewScene" class='btn btn-primary mt-2'>Добавить сцену</button>
-        <ul>
-          <li class="mt-2" v-for="(scene, ind) in curScenes" :key="'scene' + ind">
+        <draggable v-model="novel.scenes">
+          <div class="mt-2" v-for="(scene, ind) in curScenes" :key="'scene' + ind">
             <span>{{scene.title}}</span>
             <button class="btn btn-danger ml-2" @click="removeScene(scene)">X</button>
             <button class="btn btn-primary ml-2" @click="editScene(scene)">E</button>
-          </li>
-        </ul>
+          </div>
+        </draggable>
       </div>
       <div class="col">
         <NovelScene @next-scene="onNextScene" :scene="sceneEdit" :medias="novel.medias" height="300"/>
@@ -31,8 +31,6 @@
         <input type="file" accept="image/*" @change="changeFilePath($event, 'img')"><br>
         <label for="">Изменить аудио</label><br>
         <input type="file" accept="audio/*" @change="changeFilePath($event, 'audio')"><br>
-        <font-awesome-icon icon="arrow-up" @click="arrowClick('up')" />
-        <font-awesome-icon icon="arrow-down" @click="arrowClick('down')" />
       </div>
     </div>
     <div class="row">
@@ -62,10 +60,11 @@
 import _ from 'lodash'
 import NovelScene from './NovelScene'
 import NovelTextEditor from './NovelTextEditor'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'NovelEditor',
-  components: { NovelScene, NovelTextEditor },
+  components: { NovelScene, NovelTextEditor, draggable },
   data () {
     return {
       novel: null,

@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import 'bootstrap/dist/css/bootstrap.css'
 import BootstrapVue from 'bootstrap-vue'
+// import draggable from "/vuedraggable";
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faArrowUp, faArrowDown, faSave } from '@fortawesome/free-solid-svg-icons'

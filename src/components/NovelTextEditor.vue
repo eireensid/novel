@@ -3,30 +3,31 @@
     <div class="row">
       <div class="col-3">
         <button @click="addNewText" class='btn btn-primary'>Добавить текст</button>
-        <ul>
-          <li class="mt-2" v-for="(text, ind) in scene.texts" :key="'text' + ind">
+        <draggable>
+          <div class="mt-2" v-for="(text, ind) in scene.texts" :key="'text' + ind">
             <span>{{text.title}}</span>
             <button class="btn btn-danger ml-2" @click="removeText(text)">X</button>
             <button class="btn btn-primary ml-2" @click="editText(text)">E</button>
-          </li>
-        </ul>
+          </div>
+        </draggable>
       </div>
       <div class="col">
         <textarea v-model="textEdit.value" rows="10" cols="80"></textarea>
       </div>
       <div class="col-3">
         <label for="">Заголовок</label><br>
-        <input type="text" v-model="textEdit.title"><br>
-        <font-awesome-icon icon="arrow-up" @click="arrowClick('up')" />
-        <font-awesome-icon icon="arrow-down" @click="arrowClick('down')" />
+        <input type="text" v-model="textEdit.title">
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
+
 export default {
   name: 'NovelTextEditor',
+  components: { draggable },
   props: ['scene'],
   data () {
     return {
